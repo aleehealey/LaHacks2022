@@ -1,16 +1,19 @@
 Use LaHacks
 Go
 
-Create proc [GetActivity_Id]
+Create proc [GetEvent_Id]
    @id bigint
 as
 begin
 Select [Id],
-[Name],
-[ActivityGroupId],
+[GroupId],
+[ActivityId],
+[DateTime],
+[Duration],
+[EventGoogleId],
  [CreatedDate],
  [IsValid]
-from [Activity]
+from [Event]
 Where [Id] = @id
    and[IsValid] = 1
 end

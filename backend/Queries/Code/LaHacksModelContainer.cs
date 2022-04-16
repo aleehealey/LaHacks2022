@@ -9,10 +9,19 @@ public bool? IsValid { get; set; }
 public DateTime? CreatedDate { get; set; }
 
 }
+public class LaHacksActivityGroup
+{
+public long? Id { get; set; }
+public string? Name { get; set; }
+public bool? IsValid { get; set; }
+public DateTime? CreatedDate { get; set; }
+
+}
 public class LaHacksActivity
 {
 public long? Id { get; set; }
 public string? Name { get; set; }
+public long? ActivityGroupId { get; set; }
 public bool? IsValid { get; set; }
 public DateTime? CreatedDate { get; set; }
 
@@ -40,6 +49,18 @@ public class LaHacksGroupLinkUser
 public long? Id { get; set; }
 public long? GroupId { get; set; }
 public long? UserId { get; set; }
+public bool? IsValid { get; set; }
+public DateTime? CreatedDate { get; set; }
+
+}
+public class LaHacksEvent
+{
+public long? Id { get; set; }
+public long? GroupId { get; set; }
+public long? ActivityId { get; set; }
+public DateTime? DateTime { get; set; }
+public int? Duration { get; set; }
+public string? EventGoogleId { get; set; }
 public bool? IsValid { get; set; }
 public DateTime? CreatedDate { get; set; }
 
@@ -102,17 +123,17 @@ true
 );
 return result;
 }
-public async Task<List<LaHacksActivity>> GetActivity_Id(long @id)
+public async Task<List<LaHacksActivityGroup>> GetActivityGroup_Id(long @id)
 {
 var sqlParameters = new List<SqlParameter>();
 sqlParameters.Add(new SqlParameter("@id", @id));
 
-var result = await _sprocRunner.RunQueryAsync("[GetActivity_Id]", sqlParameters.ToArray(), (dr) =>
+var result = await _sprocRunner.RunQueryAsync("[GetActivityGroup_Id]", sqlParameters.ToArray(), (dr) =>
 {
-List<LaHacksActivity> objs = new List<LaHacksActivity>();
+List<LaHacksActivityGroup> objs = new List<LaHacksActivityGroup>();
 while (dr.Read())
 {
-LaHacksActivity obj = new LaHacksActivity()
+LaHacksActivityGroup obj = new LaHacksActivityGroup()
 {
 Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],Name = (dr["Name"] == DBNull.Value) ? null : (string?)dr["Name"],
 IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
@@ -126,10 +147,92 @@ return objs;
 );
 return result;
 }
-public async Task<bool> InsertActivity(string @name, DateTime @createdDate)
+public async Task<bool> InsertActivityGroup(string @name, DateTime @createdDate)
 {
 var sqlParameters = new List<SqlParameter>();
 sqlParameters.Add(new SqlParameter("@name", @name));
+sqlParameters.Add(new SqlParameter("@createdDate", @createdDate));
+
+var result = await _sprocRunner.RunQueryAsync("[InsertActivityGroup]", sqlParameters.ToArray(), (dr) =>
+true
+);
+return result;
+}
+public async Task<bool> InvalidateActivityGroup_Id(long @id)
+{
+var sqlParameters = new List<SqlParameter>();
+sqlParameters.Add(new SqlParameter("@id", @id));
+
+var result = await _sprocRunner.RunQueryAsync("[InvalidateActivityGroup_Id]", sqlParameters.ToArray(), (dr) =>
+true
+);
+return result;
+}
+public async Task<List<LaHacksActivity>> GetActivity_ActivityGroupId(long @activityGroupId)
+{
+var sqlParameters = new List<SqlParameter>();
+sqlParameters.Add(new SqlParameter("@activityGroupId", @activityGroupId));
+
+var result = await _sprocRunner.RunQueryAsync("[GetActivity_ActivityGroupId]", sqlParameters.ToArray(), (dr) =>
+{
+List<LaHacksActivity> objs = new List<LaHacksActivity>();
+while (dr.Read())
+{
+LaHacksActivity obj = new LaHacksActivity()
+{
+Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],Name = (dr["Name"] == DBNull.Value) ? null : (string?)dr["Name"],
+ActivityGroupId = (dr["ActivityGroupId"] == DBNull.Value) ? null : (long?)dr["ActivityGroupId"],
+IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
+CreatedDate = (dr["CreatedDate"] == DBNull.Value) ? null : (DateTime?)dr["CreatedDate"],
+
+};
+objs.Add(obj);
+}
+return objs;
+}
+);
+return result;
+}
+public async Task<bool> InvalidateActivity_ActivityGroupId(long @activityGroupId)
+{
+var sqlParameters = new List<SqlParameter>();
+sqlParameters.Add(new SqlParameter("@activityGroupId", @activityGroupId));
+
+var result = await _sprocRunner.RunQueryAsync("[InvalidateActivity_ActivityGroupId]", sqlParameters.ToArray(), (dr) =>
+true
+);
+return result;
+}
+public async Task<List<LaHacksActivity>> GetActivity_Id(long @id)
+{
+var sqlParameters = new List<SqlParameter>();
+sqlParameters.Add(new SqlParameter("@id", @id));
+
+var result = await _sprocRunner.RunQueryAsync("[GetActivity_Id]", sqlParameters.ToArray(), (dr) =>
+{
+List<LaHacksActivity> objs = new List<LaHacksActivity>();
+while (dr.Read())
+{
+LaHacksActivity obj = new LaHacksActivity()
+{
+Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],Name = (dr["Name"] == DBNull.Value) ? null : (string?)dr["Name"],
+ActivityGroupId = (dr["ActivityGroupId"] == DBNull.Value) ? null : (long?)dr["ActivityGroupId"],
+IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
+CreatedDate = (dr["CreatedDate"] == DBNull.Value) ? null : (DateTime?)dr["CreatedDate"],
+
+};
+objs.Add(obj);
+}
+return objs;
+}
+);
+return result;
+}
+public async Task<bool> InsertActivity(string @name, long @activityGroupId, DateTime @createdDate)
+{
+var sqlParameters = new List<SqlParameter>();
+sqlParameters.Add(new SqlParameter("@name", @name));
+sqlParameters.Add(new SqlParameter("@activityGroupId", @activityGroupId));
 sqlParameters.Add(new SqlParameter("@createdDate", @createdDate));
 
 var result = await _sprocRunner.RunQueryAsync("[InsertActivity]", sqlParameters.ToArray(), (dr) =>
@@ -459,6 +562,135 @@ var sqlParameters = new List<SqlParameter>();
 sqlParameters.Add(new SqlParameter("@id", @id));
 
 var result = await _sprocRunner.RunQueryAsync("[InvalidateGroupLinkUser_Id]", sqlParameters.ToArray(), (dr) =>
+true
+);
+return result;
+}
+public async Task<List<LaHacksEvent>> GetEvent_GroupId(long @groupId)
+{
+var sqlParameters = new List<SqlParameter>();
+sqlParameters.Add(new SqlParameter("@groupId", @groupId));
+
+var result = await _sprocRunner.RunQueryAsync("[GetEvent_GroupId]", sqlParameters.ToArray(), (dr) =>
+{
+List<LaHacksEvent> objs = new List<LaHacksEvent>();
+while (dr.Read())
+{
+LaHacksEvent obj = new LaHacksEvent()
+{
+Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],GroupId = (dr["GroupId"] == DBNull.Value) ? null : (long?)dr["GroupId"],
+ActivityId = (dr["ActivityId"] == DBNull.Value) ? null : (long?)dr["ActivityId"],
+DateTime = (dr["DateTime"] == DBNull.Value) ? null : (DateTime?)dr["DateTime"],
+Duration = (dr["Duration"] == DBNull.Value) ? null : (int?)dr["Duration"],
+EventGoogleId = (dr["EventGoogleId"] == DBNull.Value) ? null : (string?)dr["EventGoogleId"],
+IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
+CreatedDate = (dr["CreatedDate"] == DBNull.Value) ? null : (DateTime?)dr["CreatedDate"],
+
+};
+objs.Add(obj);
+}
+return objs;
+}
+);
+return result;
+}
+public async Task<bool> InvalidateEvent_GroupId(long @groupId)
+{
+var sqlParameters = new List<SqlParameter>();
+sqlParameters.Add(new SqlParameter("@groupId", @groupId));
+
+var result = await _sprocRunner.RunQueryAsync("[InvalidateEvent_GroupId]", sqlParameters.ToArray(), (dr) =>
+true
+);
+return result;
+}
+public async Task<List<LaHacksEvent>> GetEvent_ActivityId(long @activityId)
+{
+var sqlParameters = new List<SqlParameter>();
+sqlParameters.Add(new SqlParameter("@activityId", @activityId));
+
+var result = await _sprocRunner.RunQueryAsync("[GetEvent_ActivityId]", sqlParameters.ToArray(), (dr) =>
+{
+List<LaHacksEvent> objs = new List<LaHacksEvent>();
+while (dr.Read())
+{
+LaHacksEvent obj = new LaHacksEvent()
+{
+Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],GroupId = (dr["GroupId"] == DBNull.Value) ? null : (long?)dr["GroupId"],
+ActivityId = (dr["ActivityId"] == DBNull.Value) ? null : (long?)dr["ActivityId"],
+DateTime = (dr["DateTime"] == DBNull.Value) ? null : (DateTime?)dr["DateTime"],
+Duration = (dr["Duration"] == DBNull.Value) ? null : (int?)dr["Duration"],
+EventGoogleId = (dr["EventGoogleId"] == DBNull.Value) ? null : (string?)dr["EventGoogleId"],
+IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
+CreatedDate = (dr["CreatedDate"] == DBNull.Value) ? null : (DateTime?)dr["CreatedDate"],
+
+};
+objs.Add(obj);
+}
+return objs;
+}
+);
+return result;
+}
+public async Task<bool> InvalidateEvent_ActivityId(long @activityId)
+{
+var sqlParameters = new List<SqlParameter>();
+sqlParameters.Add(new SqlParameter("@activityId", @activityId));
+
+var result = await _sprocRunner.RunQueryAsync("[InvalidateEvent_ActivityId]", sqlParameters.ToArray(), (dr) =>
+true
+);
+return result;
+}
+public async Task<List<LaHacksEvent>> GetEvent_Id(long @id)
+{
+var sqlParameters = new List<SqlParameter>();
+sqlParameters.Add(new SqlParameter("@id", @id));
+
+var result = await _sprocRunner.RunQueryAsync("[GetEvent_Id]", sqlParameters.ToArray(), (dr) =>
+{
+List<LaHacksEvent> objs = new List<LaHacksEvent>();
+while (dr.Read())
+{
+LaHacksEvent obj = new LaHacksEvent()
+{
+Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],GroupId = (dr["GroupId"] == DBNull.Value) ? null : (long?)dr["GroupId"],
+ActivityId = (dr["ActivityId"] == DBNull.Value) ? null : (long?)dr["ActivityId"],
+DateTime = (dr["DateTime"] == DBNull.Value) ? null : (DateTime?)dr["DateTime"],
+Duration = (dr["Duration"] == DBNull.Value) ? null : (int?)dr["Duration"],
+EventGoogleId = (dr["EventGoogleId"] == DBNull.Value) ? null : (string?)dr["EventGoogleId"],
+IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
+CreatedDate = (dr["CreatedDate"] == DBNull.Value) ? null : (DateTime?)dr["CreatedDate"],
+
+};
+objs.Add(obj);
+}
+return objs;
+}
+);
+return result;
+}
+public async Task<bool> InsertEvent(long @groupId, long @activityId, DateTime @dateTime, int @duration, string @eventGoogleId, DateTime @createdDate)
+{
+var sqlParameters = new List<SqlParameter>();
+sqlParameters.Add(new SqlParameter("@groupId", @groupId));
+sqlParameters.Add(new SqlParameter("@activityId", @activityId));
+sqlParameters.Add(new SqlParameter("@dateTime", @dateTime));
+sqlParameters.Add(new SqlParameter("@duration", @duration));
+sqlParameters.Add(new SqlParameter("@eventGoogleId", @eventGoogleId));
+sqlParameters.Add(new SqlParameter("@createdDate", @createdDate));
+
+var result = await _sprocRunner.RunQueryAsync("[InsertEvent]", sqlParameters.ToArray(), (dr) =>
+true
+);
+return result;
+}
+public async Task<bool> InvalidateEvent_Id(long @id)
+{
+var sqlParameters = new List<SqlParameter>();
+sqlParameters.Add(new SqlParameter("@id", @id));
+
+var result = await _sprocRunner.RunQueryAsync("[InvalidateEvent_Id]", sqlParameters.ToArray(), (dr) =>
 true
 );
 return result;

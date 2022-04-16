@@ -1,16 +1,15 @@
 Use LaHacks
 Go
 
-Create proc [GetActivity_Id]
+Create proc [GetActivityGroup_Id]
    @id bigint
 as
 begin
 Select [Id],
 [Name],
-[ActivityGroupId],
  [CreatedDate],
  [IsValid]
-from [Activity]
+from [ActivityGroup]
 Where [Id] = @id
    and[IsValid] = 1
 end

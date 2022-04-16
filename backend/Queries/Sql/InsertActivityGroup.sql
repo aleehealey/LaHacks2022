@@ -1,23 +1,20 @@
 Use LaHacks
 Go
 
-Create proc [InsertActivity]
+Create proc [InsertActivityGroup]
    @name nvarchar(500),
-   @activityGroupId bigint,
    @createdDate Datetime
 as
 begin
-insert into [Activity]
+insert into [ActivityGroup]
 (
   [Name],
-  [ActivityGroupId],
   [IsValid],
   [CreatedDate]
 )
 Values
 (
   @name,
-  @activityGroupId,
   1,
   @createdDate
 )
