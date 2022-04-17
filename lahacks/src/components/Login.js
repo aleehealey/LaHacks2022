@@ -10,23 +10,12 @@ function Login() {
   );
 
   const handleFailure = (result) => {
-    alert("YOOOo wtf");
+    // alert("YOOOo wtf");
   };
 
   const handleLogin = async (googleData) => {
-    const res = await fetch('/api/google-login', {
-      method: 'POST',
-      body: JSON.stringify({
-        token: googleData.tokenId,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    const data = await res.json();
-    setLoginData(data);
-    localStorage.setItem('loginData', JSON.stringify(data));
+    console.log(googleData);
+    localStorage.setItem('loginData', JSON.stringify(googleData));
   };
   const handleLogout = () => {
     localStorage.removeItem('loginData');

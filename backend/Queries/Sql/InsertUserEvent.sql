@@ -1,32 +1,26 @@
 Use LaHacks
 Go
 
-Create proc [InsertEvent]
-   @groupId bigint,
-   @activityId bigint,
+Create proc [InsertUserEvent]
+   @userId bigint,
    @startTime Datetime,
    @duration int,
-   @eventGoogleId bigint,
    @createdDate Datetime
 as
 begin
-insert into [Event]
+insert into [UserEvent]
 (
-  [GroupId],
-  [ActivityId],
+  [UserId],
   [StartTime],
   [Duration],
-  [EventGoogleId],
   [IsValid],
   [CreatedDate]
 )
 Values
 (
-  @groupId,
-  @activityId,
+  @userId,
   @startTime,
   @duration,
-  @eventGoogleId,
   1,
   @createdDate
 )

@@ -68,7 +68,7 @@ namespace LaHacks2022.Controllers
         {
             try
             {
-                await _userService.AddPeopleToGroup(req.GroupId, req.UserIds);
+                await _userService.AddPeopleToGroup(req.GroupCode, req.UserIds);
                 return Ok(true);
             }
             catch (Exception ex)

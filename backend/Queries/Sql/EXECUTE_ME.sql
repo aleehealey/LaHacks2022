@@ -67,6 +67,7 @@ Create Table [Group]
 	[Id] bigint not null primary key Identity(1,1),
    [UserId] bigint not null foreign key references [User]([Id]) ,
    [Location] nvarchar(500) not null  ,
+   [Code] nvarchar(500) not null  ,
    [IsValid] bit not null  ,
    [CreatedDate] DateTime not null  ,
 )
@@ -93,9 +94,23 @@ Create Table [Event]
 	[Id] bigint not null primary key Identity(1,1),
    [GroupId] bigint not null foreign key references [Group]([Id]) ,
    [ActivityId] bigint not null foreign key references [Activity]([Id]) ,
-   [DateTime] Datetime not null  ,
+   [StartTime] Datetime not null  ,
    [Duration] int not null  ,
-   [EventGoogleId] nvarchar(500) not null  ,
+   [EventGoogleId] bigint not null  ,
+   [IsValid] bit not null  ,
+   [CreatedDate] DateTime not null  ,
+)
+
+Go
+
+
+drop table if exists [UserEvent]
+Create Table [UserEvent]
+(
+	[Id] bigint not null primary key Identity(1,1),
+   [UserId] bigint not null foreign key references [User]([Id]) ,
+   [StartTime] Datetime not null  ,
+   [Duration] int not null  ,
    [IsValid] bit not null  ,
    [CreatedDate] DateTime not null  ,
 )
@@ -442,6 +457,7 @@ begin
 Select [Id],
 [UserId],
 [Location],
+[Code],
  [CreatedDate],
  [IsValid]
 from [Group]
@@ -455,6 +471,7 @@ Go
 Create proc [InsertGroup]
    @userId bigint,
    @location nvarchar(500),
+   @code nvarchar(500),
    @createdDate Datetime
 as
 begin
@@ -462,6 +479,7 @@ insert into [Group]
 (
   [UserId],
   [Location],
+  [Code],
   [IsValid],
   [CreatedDate]
 )
@@ -469,6 +487,7 @@ Values
 (
   @userId,
   @location,
+  @code,
   1,
   @createdDate
 )
@@ -658,7 +677,7 @@ begin
 Select [Id],
 [GroupId],
 [ActivityId],
-[DateTime],
+[StartTime],
 [Duration],
 [EventGoogleId],
  [CreatedDate],
@@ -674,9 +693,9 @@ Go
 Create proc [InsertEvent]
    @groupId bigint,
    @activityId bigint,
-   @dateTime Datetime,
+   @startTime Datetime,
    @duration int,
-   @eventGoogleId nvarchar(500),
+   @eventGoogleId bigint,
    @createdDate Datetime
 as
 begin
@@ -684,7 +703,7 @@ insert into [Event]
 (
   [GroupId],
   [ActivityId],
-  [DateTime],
+  [StartTime],
   [Duration],
   [EventGoogleId],
   [IsValid],
@@ -694,7 +713,7 @@ Values
 (
   @groupId,
   @activityId,
-  @dateTime,
+  @startTime,
   @duration,
   @eventGoogleId,
   1,
@@ -711,6 +730,92 @@ Create proc [InvalidateEvent_Id]
 as
 begin
 Update [Event]
+set IsValid = 0
+Where Id = @id
+
+end
+
+Go
+
+
+Create proc [GetUserEvent_UserId]
+   @userId bigint
+as
+begin
+Select *
+from [UserEvent]
+Where [UserId] = @userId
+   and[IsValid] = 1
+end
+
+Go
+
+
+Create proc [InvalidateUserEvent_UserId]
+   @userId bigint
+as
+begin
+Update [UserEvent]
+set IsValid = 0
+Where UserId = @userId
+
+end
+
+Go
+
+
+Create proc [GetUserEvent_Id]
+   @id bigint
+as
+begin
+Select [Id],
+[UserId],
+[StartTime],
+[Duration],
+ [CreatedDate],
+ [IsValid]
+from [UserEvent]
+Where [Id] = @id
+   and[IsValid] = 1
+end
+
+Go
+
+
+Create proc [InsertUserEvent]
+   @userId bigint,
+   @startTime Datetime,
+   @duration int,
+   @createdDate Datetime
+as
+begin
+insert into [UserEvent]
+(
+  [UserId],
+  [StartTime],
+  [Duration],
+  [IsValid],
+  [CreatedDate]
+)
+Values
+(
+  @userId,
+  @startTime,
+  @duration,
+  1,
+  @createdDate
+)
+
+end
+
+Go
+
+
+Create proc [InvalidateUserEvent_Id]
+   @id bigint
+as
+begin
+Update [UserEvent]
 set IsValid = 0
 Where Id = @id
 

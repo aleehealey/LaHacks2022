@@ -1,17 +1,17 @@
 Use LaHacks
 Go
 
-Create proc [GetGroup_Id]
+Create proc [GetUserEvent_Id]
    @id bigint
 as
 begin
 Select [Id],
 [UserId],
-[Location],
-[Code],
+[StartTime],
+[Duration],
  [CreatedDate],
  [IsValid]
-from [Group]
+from [UserEvent]
 Where [Id] = @id
    and[IsValid] = 1
 end

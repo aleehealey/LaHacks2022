@@ -8,7 +8,7 @@ begin
 Select [Id],
 [GroupId],
 [ActivityId],
-[DateTime],
+[StartTime],
 [Duration],
 [EventGoogleId],
  [CreatedDate],

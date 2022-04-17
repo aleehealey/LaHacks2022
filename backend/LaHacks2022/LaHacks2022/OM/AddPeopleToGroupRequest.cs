@@ -2,7 +2,7 @@
 {
     public class AddPeopleToGroupRequest
     {
-        public long GroupId { get; set; }
+        public string GroupCode { get; set; }
         public List<long> UserIds { get; set; }
     }
 }

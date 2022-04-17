@@ -44,6 +44,7 @@ namespace Model
         public long? Id { get; set; }
         public long? UserId { get; set; }
         public string? Location { get; set; }
+        public string? Code { get; set; }
         public bool? IsValid { get; set; }
         public DateTime? CreatedDate { get; set; }
 
@@ -62,9 +63,19 @@ namespace Model
         public long? Id { get; set; }
         public long? GroupId { get; set; }
         public long? ActivityId { get; set; }
-        public DateTime? DateTime { get; set; }
+        public DateTime? StartTime { get; set; }
         public int? Duration { get; set; }
-        public string? EventGoogleId { get; set; }
+        public long? EventGoogleId { get; set; }
+        public bool? IsValid { get; set; }
+        public DateTime? CreatedDate { get; set; }
+
+    }
+    public class LaHacksUserEvent
+    {
+        public long? Id { get; set; }
+        public long? UserId { get; set; }
+        public DateTime? StartTime { get; set; }
+        public int? Duration { get; set; }
         public bool? IsValid { get; set; }
         public DateTime? CreatedDate { get; set; }
 
@@ -393,6 +404,7 @@ namespace Model
                         Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],
                         UserId = (dr["UserId"] == DBNull.Value) ? null : (long?)dr["UserId"],
                         Location = (dr["Location"] == DBNull.Value) ? null : (string?)dr["Location"],
+                        Code = (dr["Code"] == DBNull.Value) ? null : (string?)dr["Code"],
                         IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
                         CreatedDate = (dr["CreatedDate"] == DBNull.Value) ? null : (DateTime?)dr["CreatedDate"],
 
@@ -414,6 +426,33 @@ namespace Model
             );
             return result;
         }
+        public async Task<List<LaHacksGroup>> GetGroup_Code(string code)
+        {
+            var sqlParameters = new List<SqlParameter>();
+            sqlParameters.Add(new SqlParameter("@code", code));
+
+            var result = await _sprocRunner.RunQueryAsync("[GetGroup_Code]", sqlParameters.ToArray(), (dr) =>
+            {
+                List<LaHacksGroup> objs = new List<LaHacksGroup>();
+                while (dr.Read())
+                {
+                    LaHacksGroup obj = new LaHacksGroup()
+                    {
+                        Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],
+                        UserId = (dr["UserId"] == DBNull.Value) ? null : (long?)dr["UserId"],
+                        Location = (dr["Location"] == DBNull.Value) ? null : (string?)dr["Location"],
+                        Code = (dr["Code"] == DBNull.Value) ? null : (string?)dr["Code"],
+                        IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
+                        CreatedDate = (dr["CreatedDate"] == DBNull.Value) ? null : (DateTime?)dr["CreatedDate"],
+
+                    };
+                    objs.Add(obj);
+                }
+                return objs;
+            }
+            );
+            return result;
+        }
         public async Task<List<LaHacksGroup>> GetGroup_Id(long @id)
         {
             var sqlParameters = new List<SqlParameter>();
@@ -429,6 +468,7 @@ namespace Model
                         Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],
                         UserId = (dr["UserId"] == DBNull.Value) ? null : (long?)dr["UserId"],
                         Location = (dr["Location"] == DBNull.Value) ? null : (string?)dr["Location"],
+                        Code = (dr["Code"] == DBNull.Value) ? null : (string?)dr["Code"],
                         IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
                         CreatedDate = (dr["CreatedDate"] == DBNull.Value) ? null : (DateTime?)dr["CreatedDate"],
 
@@ -440,11 +480,12 @@ namespace Model
             );
             return result;
         }
-        public async Task<bool> InsertGroup(long @userId, string @location, DateTime @createdDate)
+        public async Task<bool> InsertGroup(long @userId, string @location, string @code, DateTime @createdDate)
         {
             var sqlParameters = new List<SqlParameter>();
             sqlParameters.Add(new SqlParameter("@userId", @userId));
             sqlParameters.Add(new SqlParameter("@location", @location));
+            sqlParameters.Add(new SqlParameter("@code", @code));
             sqlParameters.Add(new SqlParameter("@createdDate", @createdDate));
 
             var result = await _sprocRunner.RunQueryAsync("[InsertGroup]", sqlParameters.ToArray(), (dr) =>
@@ -597,9 +638,9 @@ namespace Model
                         Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],
                         GroupId = (dr["GroupId"] == DBNull.Value) ? null : (long?)dr["GroupId"],
                         ActivityId = (dr["ActivityId"] == DBNull.Value) ? null : (long?)dr["ActivityId"],
-                        DateTime = (dr["DateTime"] == DBNull.Value) ? null : (DateTime?)dr["DateTime"],
+                        StartTime = (dr["StartTime"] == DBNull.Value) ? null : (DateTime?)dr["StartTime"],
                         Duration = (dr["Duration"] == DBNull.Value) ? null : (int?)dr["Duration"],
-                        EventGoogleId = (dr["EventGoogleId"] == DBNull.Value) ? null : (string?)dr["EventGoogleId"],
+                        EventGoogleId = (dr["EventGoogleId"] == DBNull.Value) ? null : (long?)dr["EventGoogleId"],
                         IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
                         CreatedDate = (dr["CreatedDate"] == DBNull.Value) ? null : (DateTime?)dr["CreatedDate"],
 
@@ -636,9 +677,9 @@ namespace Model
                         Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],
                         GroupId = (dr["GroupId"] == DBNull.Value) ? null : (long?)dr["GroupId"],
                         ActivityId = (dr["ActivityId"] == DBNull.Value) ? null : (long?)dr["ActivityId"],
-                        DateTime = (dr["DateTime"] == DBNull.Value) ? null : (DateTime?)dr["DateTime"],
+                        StartTime = (dr["StartTime"] == DBNull.Value) ? null : (DateTime?)dr["StartTime"],
                         Duration = (dr["Duration"] == DBNull.Value) ? null : (int?)dr["Duration"],
-                        EventGoogleId = (dr["EventGoogleId"] == DBNull.Value) ? null : (string?)dr["EventGoogleId"],
+                        EventGoogleId = (dr["EventGoogleId"] == DBNull.Value) ? null : (long?)dr["EventGoogleId"],
                         IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
                         CreatedDate = (dr["CreatedDate"] == DBNull.Value) ? null : (DateTime?)dr["CreatedDate"],
 
@@ -675,9 +716,9 @@ namespace Model
                         Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],
                         GroupId = (dr["GroupId"] == DBNull.Value) ? null : (long?)dr["GroupId"],
                         ActivityId = (dr["ActivityId"] == DBNull.Value) ? null : (long?)dr["ActivityId"],
-                        DateTime = (dr["DateTime"] == DBNull.Value) ? null : (DateTime?)dr["DateTime"],
+                        StartTime = (dr["StartTime"] == DBNull.Value) ? null : (DateTime?)dr["StartTime"],
                         Duration = (dr["Duration"] == DBNull.Value) ? null : (int?)dr["Duration"],
-                        EventGoogleId = (dr["EventGoogleId"] == DBNull.Value) ? null : (string?)dr["EventGoogleId"],
+                        EventGoogleId = (dr["EventGoogleId"] == DBNull.Value) ? null : (long?)dr["EventGoogleId"],
                         IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
                         CreatedDate = (dr["CreatedDate"] == DBNull.Value) ? null : (DateTime?)dr["CreatedDate"],
 
@@ -689,12 +730,12 @@ namespace Model
             );
             return result;
         }
-        public async Task<bool> InsertEvent(long @groupId, long @activityId, DateTime @dateTime, int @duration, string @eventGoogleId, DateTime @createdDate)
+        public async Task<bool> InsertEvent(long @groupId, long @activityId, DateTime @startTime, int @duration, long @eventGoogleId, DateTime @createdDate)
         {
             var sqlParameters = new List<SqlParameter>();
             sqlParameters.Add(new SqlParameter("@groupId", @groupId));
             sqlParameters.Add(new SqlParameter("@activityId", @activityId));
-            sqlParameters.Add(new SqlParameter("@dateTime", @dateTime));
+            sqlParameters.Add(new SqlParameter("@startTime", @startTime));
             sqlParameters.Add(new SqlParameter("@duration", @duration));
             sqlParameters.Add(new SqlParameter("@eventGoogleId", @eventGoogleId));
             sqlParameters.Add(new SqlParameter("@createdDate", @createdDate));
@@ -710,6 +751,93 @@ namespace Model
             sqlParameters.Add(new SqlParameter("@id", @id));
 
             var result = await _sprocRunner.RunQueryAsync("[InvalidateEvent_Id]", sqlParameters.ToArray(), (dr) =>
+            true
+            );
+            return result;
+        }
+        public async Task<List<LaHacksUserEvent>> GetUserEvent_UserId(long @userId)
+        {
+            var sqlParameters = new List<SqlParameter>();
+            sqlParameters.Add(new SqlParameter("@userId", @userId));
+
+            var result = await _sprocRunner.RunQueryAsync("[GetUserEvent_UserId]", sqlParameters.ToArray(), (dr) =>
+            {
+                List<LaHacksUserEvent> objs = new List<LaHacksUserEvent>();
+                while (dr.Read())
+                {
+                    LaHacksUserEvent obj = new LaHacksUserEvent()
+                    {
+                        Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],
+                        UserId = (dr["UserId"] == DBNull.Value) ? null : (long?)dr["UserId"],
+                        StartTime = (dr["StartTime"] == DBNull.Value) ? null : (DateTime?)dr["StartTime"],
+                        Duration = (dr["Duration"] == DBNull.Value) ? null : (int?)dr["Duration"],
+                        IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
+                        CreatedDate = (dr["CreatedDate"] == DBNull.Value) ? null : (DateTime?)dr["CreatedDate"],
+
+                    };
+                    objs.Add(obj);
+                }
+                return objs;
+            }
+            );
+            return result;
+        }
+        public async Task<bool> InvalidateUserEvent_UserId(long @userId)
+        {
+            var sqlParameters = new List<SqlParameter>();
+            sqlParameters.Add(new SqlParameter("@userId", @userId));
+
+            var result = await _sprocRunner.RunQueryAsync("[InvalidateUserEvent_UserId]", sqlParameters.ToArray(), (dr) =>
+            true
+            );
+            return result;
+        }
+        public async Task<List<LaHacksUserEvent>> GetUserEvent_Id(long @id)
+        {
+            var sqlParameters = new List<SqlParameter>();
+            sqlParameters.Add(new SqlParameter("@id", @id));
+
+            var result = await _sprocRunner.RunQueryAsync("[GetUserEvent_Id]", sqlParameters.ToArray(), (dr) =>
+            {
+                List<LaHacksUserEvent> objs = new List<LaHacksUserEvent>();
+                while (dr.Read())
+                {
+                    LaHacksUserEvent obj = new LaHacksUserEvent()
+                    {
+                        Id = (dr["Id"] == DBNull.Value) ? null : (long?)dr["Id"],
+                        UserId = (dr["UserId"] == DBNull.Value) ? null : (long?)dr["UserId"],
+                        StartTime = (dr["StartTime"] == DBNull.Value) ? null : (DateTime?)dr["StartTime"],
+                        Duration = (dr["Duration"] == DBNull.Value) ? null : (int?)dr["Duration"],
+                        IsValid = (dr["IsValid"] == DBNull.Value) ? null : (bool?)dr["IsValid"],
+                        CreatedDate = (dr["CreatedDate"] == DBNull.Value) ? null : (DateTime?)dr["CreatedDate"],
+
+                    };
+                    objs.Add(obj);
+                }
+                return objs;
+            }
+            );
+            return result;
+        }
+        public async Task<bool> InsertUserEvent(long @userId, DateTime @startTime, int @duration, DateTime @createdDate)
+        {
+            var sqlParameters = new List<SqlParameter>();
+            sqlParameters.Add(new SqlParameter("@userId", @userId));
+            sqlParameters.Add(new SqlParameter("@startTime", @startTime));
+            sqlParameters.Add(new SqlParameter("@duration", @duration));
+            sqlParameters.Add(new SqlParameter("@createdDate", @createdDate));
+
+            var result = await _sprocRunner.RunQueryAsync("[InsertUserEvent]", sqlParameters.ToArray(), (dr) =>
+            true
+            );
+            return result;
+        }
+        public async Task<bool> InvalidateUserEvent_Id(long @id)
+        {
+            var sqlParameters = new List<SqlParameter>();
+            sqlParameters.Add(new SqlParameter("@id", @id));
+
+            var result = await _sprocRunner.RunQueryAsync("[InvalidateUserEvent_Id]", sqlParameters.ToArray(), (dr) =>
             true
             );
             return result;

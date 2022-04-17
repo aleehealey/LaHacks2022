@@ -1,12 +1,12 @@
 Use LaHacks
 
-drop table if exists [Group]
-Create Table [Group]
+drop table if exists [UserEvent]
+Create Table [UserEvent]
 (
 	[Id] bigint not null primary key Identity(1,1),
    [UserId] bigint not null foreign key references [User]([Id]) ,
-   [Location] nvarchar(500) not null  ,
-   [Code] nvarchar(500) not null  ,
+   [StartTime] Datetime not null  ,
+   [Duration] int not null  ,
    [IsValid] bit not null  ,
    [CreatedDate] DateTime not null  ,
 )
