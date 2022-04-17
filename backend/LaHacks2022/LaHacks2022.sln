@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaHacks2022", "LaHacks2022\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{1F96B552-DC22-49BA-BDAA-83A97B6E19D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi", "GoogleApi\GoogleApi.csproj", "{7D6F247F-5091-4D69-B273-483B86D210A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{08C52537-2D58-4AA2-ABCA-BD48B003A643}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{1F96B552-DC22-49BA-BDAA-83A97B6E19D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F96B552-DC22-49BA-BDAA-83A97B6E19D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F96B552-DC22-49BA-BDAA-83A97B6E19D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D6F247F-5091-4D69-B273-483B86D210A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D6F247F-5091-4D69-B273-483B86D210A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D6F247F-5091-4D69-B273-483B86D210A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D6F247F-5091-4D69-B273-483B86D210A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08C52537-2D58-4AA2-ABCA-BD48B003A643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08C52537-2D58-4AA2-ABCA-BD48B003A643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08C52537-2D58-4AA2-ABCA-BD48B003A643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08C52537-2D58-4AA2-ABCA-BD48B003A643}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
