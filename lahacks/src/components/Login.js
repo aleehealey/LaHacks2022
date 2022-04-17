@@ -1,8 +1,8 @@
 import GoogleLogin from 'react-google-login';
 import { useState } from 'react';
 
-function SignUp() {
-  
+function Login() {
+
   const [loginData, setLoginData] = useState(
     localStorage.getItem('loginData')
       ? JSON.parse(localStorage.getItem('loginData'))
@@ -10,7 +10,7 @@ function SignUp() {
   );
 
   const handleFailure = (result) => {
-    alert(result);
+    alert("YOOOo wtf");
   };
 
   const handleLogin = async (googleData) => {
@@ -43,7 +43,7 @@ function SignUp() {
               <button onClick={handleLogout}>Logout</button>
             </div>
           ) : (
-              <GoogleLogin
+            <GoogleLogin
               clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
               buttonText="Log in with Google"
               scope='https://www.googleapis.com/auth/calendar'
@@ -58,4 +58,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default Login;

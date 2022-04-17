@@ -1,5 +1,5 @@
 import './App.css';
-import SignUp from './components/SignUp';
+import SignUp from './components/Login';
 import ResponsiveAppBar from './components/Header';
 
 export default function App() {
