@@ -1,0 +1,12 @@
+C:\Users\austi\Desktop\LaHacks2022 -2\LaHacks2022\backend\LaHacks2022\GoogleApi\bin\Debug\net6.0\GoogleApi.deps.json
+C:\Users\austi\Desktop\LaHacks2022 -2\LaHacks2022\backend\LaHacks2022\GoogleApi\bin\Debug\net6.0\GoogleApi.dll
+C:\Users\austi\Desktop\LaHacks2022 -2\LaHacks2022\backend\LaHacks2022\GoogleApi\bin\Debug\net6.0\GoogleApi.pdb
+C:\Users\austi\Desktop\LaHacks2022 -2\LaHacks2022\backend\LaHacks2022\GoogleApi\obj\Debug\net6.0\GoogleApi.csproj.AssemblyReference.cache
+C:\Users\austi\Desktop\LaHacks2022 -2\LaHacks2022\backend\LaHacks2022\GoogleApi\obj\Debug\net6.0\GoogleApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\austi\Desktop\LaHacks2022 -2\LaHacks2022\backend\LaHacks2022\GoogleApi\obj\Debug\net6.0\GoogleApi.AssemblyInfoInputs.cache
+C:\Users\austi\Desktop\LaHacks2022 -2\LaHacks2022\backend\LaHacks2022\GoogleApi\obj\Debug\net6.0\GoogleApi.AssemblyInfo.cs
+C:\Users\austi\Desktop\LaHacks2022 -2\LaHacks2022\backend\LaHacks2022\GoogleApi\obj\Debug\net6.0\GoogleApi.csproj.CoreCompileInputs.cache
+C:\Users\austi\Desktop\LaHacks2022 -2\LaHacks2022\backend\LaHacks2022\GoogleApi\obj\Debug\net6.0\GoogleApi.dll
+C:\Users\austi\Desktop\LaHacks2022 -2\LaHacks2022\backend\LaHacks2022\GoogleApi\obj\Debug\net6.0\refint\GoogleApi.dll
+C:\Users\austi\Desktop\LaHacks2022 -2\LaHacks2022\backend\LaHacks2022\GoogleApi\obj\Debug\net6.0\GoogleApi.pdb
+C:\Users\austi\Desktop\LaHacks2022 -2\LaHacks2022\backend\LaHacks2022\GoogleApi\obj\Debug\net6.0\ref\GoogleApi.dll
