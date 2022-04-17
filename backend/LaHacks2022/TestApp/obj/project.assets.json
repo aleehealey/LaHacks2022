@@ -29,6 +29,19 @@
           "lib/netstandard2.0/Google.Apis.Auth.dll": {}
         }
       },
+      "Google.Apis.Calendar.v3/1.57.0.2647": {
+        "type": "package",
+        "dependencies": {
+          "Google.Apis": "1.57.0",
+          "Google.Apis.Auth": "1.57.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Calendar.v3.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Calendar.v3.dll": {}
+        }
+      },
       "Google.Apis.Core/1.57.0": {
         "type": "package",
         "dependencies": {
@@ -64,6 +77,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Google.Apis.Auth": "1.57.0",
+          "Google.Apis.Calendar.v3": "1.57.0.2647",
           "RestSharp": "107.3.0"
         },
         "compile": {
@@ -126,6 +140,34 @@
         "lib/netstandard2.0/Google.Apis.Auth.dll",
         "lib/netstandard2.0/Google.Apis.Auth.pdb",
         "lib/netstandard2.0/Google.Apis.Auth.xml"
+      ]
+    },
+    "Google.Apis.Calendar.v3/1.57.0.2647": {
+      "sha512": "HlauxLatxkuygYWtbFZqRaJvK1+keUqDhmBH63LCXg0FjZxCJE3Yq3ooE05l63XhoX3VbchehVnrx2meXxw2Gw==",
+      "type": "package",
+      "path": "google.apis.calendar.v3/1.57.0.2647",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.apis.calendar.v3.1.57.0.2647.nupkg.sha512",
+        "google.apis.calendar.v3.nuspec",
+        "lib/net40/Google.Apis.Calendar.v3.dll",
+        "lib/net40/Google.Apis.Calendar.v3.pdb",
+        "lib/net40/Google.Apis.Calendar.v3.xml",
+        "lib/net45/Google.Apis.Calendar.v3.dll",
+        "lib/net45/Google.Apis.Calendar.v3.pdb",
+        "lib/net45/Google.Apis.Calendar.v3.xml",
+        "lib/netstandard1.0/Google.Apis.Calendar.v3.dll",
+        "lib/netstandard1.0/Google.Apis.Calendar.v3.pdb",
+        "lib/netstandard1.0/Google.Apis.Calendar.v3.xml",
+        "lib/netstandard1.3/Google.Apis.Calendar.v3.dll",
+        "lib/netstandard1.3/Google.Apis.Calendar.v3.pdb",
+        "lib/netstandard1.3/Google.Apis.Calendar.v3.xml",
+        "lib/netstandard2.0/Google.Apis.Calendar.v3.dll",
+        "lib/netstandard2.0/Google.Apis.Calendar.v3.pdb",
+        "lib/netstandard2.0/Google.Apis.Calendar.v3.xml"
       ]
     },
     "Google.Apis.Core/1.57.0": {

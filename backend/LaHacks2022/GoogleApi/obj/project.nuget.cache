@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "2EEd8u5lOh53TwYeDrVZK82fhNA4btqyw0rxVOmNL1YCe7pVCeljKS9XphDGdvaUGimQhGJeINgERj/biSpJZA==",
+  "dgSpecHash": "N4Kk7Qo8ytkZRchI+H07q5F5dJcc28rdd9/9Dw7rbEgueqlJLd5HoxA8Nv/PwoRNxDhL+m66JpKOBM/ID0mpLg==",
   "success": true,
   "projectFilePath": "C:\\Users\\austi\\Desktop\\LaHacks2022 -2\\LaHacks2022\\backend\\LaHacks2022\\GoogleApi\\GoogleApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\austi\\.nuget\\packages\\google.apis\\1.57.0\\google.apis.1.57.0.nupkg.sha512",
     "C:\\Users\\austi\\.nuget\\packages\\google.apis.auth\\1.57.0\\google.apis.auth.1.57.0.nupkg.sha512",
+    "C:\\Users\\austi\\.nuget\\packages\\google.apis.calendar.v3\\1.57.0.2647\\google.apis.calendar.v3.1.57.0.2647.nupkg.sha512",
     "C:\\Users\\austi\\.nuget\\packages\\google.apis.core\\1.57.0\\google.apis.core.1.57.0.nupkg.sha512",
     "C:\\Users\\austi\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\austi\\.nuget\\packages\\restsharp\\107.3.0\\restsharp.107.3.0.nupkg.sha512"
