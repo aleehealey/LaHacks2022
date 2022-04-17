@@ -69,9 +69,9 @@ h3{
     cursor: pointer;
     display: inline-block;
     border-radius: 25px;
-    position: relative;
-    left: 1000px; 
-    top: 1000px;
+    position: absolute;
+    left: 750px; 
+    top: 500px;
     font-family:Arial, Helvetica, sans-serif;
 }
 .dropbtn2:hover{
@@ -81,20 +81,7 @@ h3{
 
 .dropbtn2 {background-image: linear-gradient(to right, #00d2ff 0%, #3a7bd5 51%, #00d2ff 100%)}
 .dropbtn2:hover { background-position: right center; }
-/*
-.dropbtn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  left: 40rem; 
-  border-radius: 12px;
-  bottom: 300px;
-}
-*/
+
 .scrollable{
    overflow: auto;
    width: 150; /* adjust this width depending to amount of text to display */
